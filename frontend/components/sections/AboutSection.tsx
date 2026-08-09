@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { siteData } from '@/data/site';
 import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
@@ -26,6 +27,16 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start mt-8">
           {/* Left Column: Founder Quote & CTA */}
           <div className="lg:col-span-5 space-y-6">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 mb-6">
+              <Image 
+                src="/images/meditation.png" 
+                alt="Inner Latitude meditation circle" 
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
+            </div>
+
             <GlassCard glowColor="gold" className="border-l-4 border-l-[var(--accent-gold)]">
               <p className="font-serif text-xl md:text-2xl italic bg-clip-text text-transparent bg-gradient-to-br from-[var(--text-primary)] to-[var(--text-secondary)] leading-relaxed mb-6">
                 &quot;Silence is where transformation begins. Inner Latitude is the space where science meets ancient wisdom — and where people come to find themselves, together.&quot;

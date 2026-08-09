@@ -32,8 +32,14 @@ export function SponsorshipSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.12 }}
-                className="relative flex"
+                className="relative flex pt-4"
               >
+                {/* Badge */}
+                {tier.badge && (
+                  <div className="absolute top-0.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[var(--accent-gold)] text-white dark:text-zinc-950 text-[10px] uppercase tracking-[0.2em] font-semibold shadow-md z-10 whitespace-nowrap">
+                    {tier.badge}
+                  </div>
+                )}
                 <GlassCard
                   glowColor={isPopular ? 'gold' : isExclusive ? 'terra' : 'sage'}
                   className={`w-full flex flex-col justify-between p-6 sm:p-8 relative ${
@@ -44,13 +50,6 @@ export function SponsorshipSection() {
                       : ''
                   }`}
                 >
-                  {/* Badge */}
-                  {tier.badge && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[var(--accent-gold)] text-white dark:text-zinc-950 text-[10px] uppercase tracking-[0.2em] font-semibold shadow-md whitespace-nowrap">
-                      {tier.badge}
-                    </div>
-                  )}
-
                   <div>
                     <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[var(--accent-terra)] mb-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-terra)] shrink-0" />

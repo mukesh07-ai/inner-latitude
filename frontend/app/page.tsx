@@ -11,12 +11,14 @@ import { PartnersSection } from '@/components/sections/PartnersSection';
 import { CultureSection } from '@/components/sections/CultureSection';
 import { TimelineSection } from '@/components/sections/TimelineSection';
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
+import { MediaGallerySection } from '@/components/sections/MediaGallerySection';
 
 export default function HomePage() {
   return (
     <div className="space-y-0">
       <Hero />
       <AboutSection />
+      <MediaGallerySection />
       <RetreatSection />
       <ConfluenceSection />
       <AudienceSection />

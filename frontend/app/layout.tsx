@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { SITE_METADATA } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: `${SITE_METADATA.name} — ${SITE_METADATA.tagline}`,
+  title: `${SITE_METADATA.name} | ${SITE_METADATA.tagline}`,
   description: SITE_METADATA.description,
   keywords: [
     'Wellness Retreat Goa',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Inner Latitude Team' }],
   openGraph: {
-    title: `${SITE_METADATA.name} — ${SITE_METADATA.tagline}`,
+    title: `${SITE_METADATA.name} | ${SITE_METADATA.tagline}`,
     description: SITE_METADATA.description,
     type: 'website',
     locale: 'en_IN',

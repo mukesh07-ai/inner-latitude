@@ -1,36 +1,30 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Hero } from '@/components/sections/Hero';
+import { LogoSliderSection } from '@/components/sections/LogoSliderSection';
 import { AboutSection } from '@/components/sections/AboutSection';
+import { StatsCounterSection } from '@/components/sections/StatsCounterSection';
+import { MediaGallerySection } from '@/components/sections/MediaGallerySection';
 import { RetreatSection } from '@/components/sections/RetreatSection';
 import { ConfluenceSection } from '@/components/sections/ConfluenceSection';
-import { AudienceSection } from '@/components/sections/AudienceSection';
+import { TestimonialSection } from '@/components/sections/TestimonialSection';
 import { WhyInnerLatitude } from '@/components/sections/WhyInnerLatitude';
-import { SponsorshipSection } from '@/components/sections/SponsorshipSection';
-import { CommunitySection } from '@/components/sections/CommunitySection';
-import { PartnersSection } from '@/components/sections/PartnersSection';
-import { CultureSection } from '@/components/sections/CultureSection';
-import { TimelineSection } from '@/components/sections/TimelineSection';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
-import { MediaGallerySection } from '@/components/sections/MediaGallerySection';
 
 export default function HomePage() {
   return (
     <div className="space-y-0">
       <Hero />
+      <LogoSliderSection />
       <AboutSection />
+      <StatsCounterSection />
       <MediaGallerySection />
       <RetreatSection />
       <ConfluenceSection />
-      <AudienceSection />
+      <TestimonialSection />
       <WhyInnerLatitude />
-      <SponsorshipSection />
-      <CommunitySection />
-      <PartnersSection />
-      <CultureSection />
-      <TimelineSection />
-      <Suspense fallback={<div className="text-center py-12">Loading form...</div>}>
-        <ContactFormSection />
-      </Suspense>
+      <FAQSection />
+      <ContactFormSection />
     </div>
   );
 }

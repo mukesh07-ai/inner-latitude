@@ -1,52 +1,41 @@
-import React, { Suspense } from 'react';
-import { Metadata } from 'next';
-import { ContactFormSection } from '@/components/sections/ContactFormSection';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Contact Us — Inner Latitude',
-  description: 'Reach out to the Inner Latitude team regarding retreats, sponsorship, community membership, or partnership opportunities.',
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ContactFormSection } from '@/components/sections/ContactFormSection';
+import { MapPin, Mail, Phone, Clock } from 'lucide-react';
+import { SITE_METADATA } from '@/lib/constants';
 
 export default function ContactPage() {
   return (
-    <div className="pt-32 pb-20 space-y-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="GET IN TOUCH"
-          title="Start a"
-          highlightText="Conversation."
-          description="We read every message and respond within 24 hours."
-        />
+    <div className="pt-24 md:pt-32 pb-16 bg-[var(--bg-primary)]">
+      {/* Header Section */}
+      <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto space-y-6"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--accent-sage)]/30 bg-[var(--accent-sage)]/10 text-[var(--accent-sage)] text-xs font-semibold tracking-widest uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-sage)] animate-pulse" />
+            Connect With Us
+          </div>
+          
+          <h1 className="font-serif text-5xl md:text-7xl font-normal tracking-tight text-[var(--text-primary)]">
+            We are here to <span className="italic text-[var(--accent-sage)]">Listen</span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl mx-auto">
+            Whether you have questions about our retreats, wish to collaborate, or simply want to share your journey—reach out.
+          </p>
+        </motion.div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
-          <GlassCard glowColor="gold" className="p-6">
-            <span className="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold block mb-1">
-              General Enquiries
-            </span>
-            <div className="font-serif text-lg text-[var(--text-primary)]">hello@innerlatitude.com</div>
-          </GlassCard>
-
-          <GlassCard glowColor="sage" className="p-6">
-            <span className="text-xs uppercase tracking-widest text-[var(--accent-sage)] font-semibold block mb-1">
-              Location
-            </span>
-            <div className="font-serif text-lg text-[var(--text-primary)]">South Goa & Pan-India</div>
-          </GlassCard>
-
-          <GlassCard glowColor="terra" className="p-6">
-            <span className="text-xs uppercase tracking-widest text-[var(--accent-terra)] font-semibold block mb-1">
-              Sponsorship & Expo
-            </span>
-            <div className="font-serif text-lg text-[var(--text-primary)]">expo@innerlatitude.com</div>
-          </GlassCard>
-        </div>
-      </div>
-
-      <Suspense fallback={<div className="text-center py-12">Loading form...</div>}>
+      {/* Embedded Form Section */}
+      <div className="mt-8">
         <ContactFormSection />
-      </Suspense>
+      </div>
     </div>
   );
 }

@@ -1,150 +1,136 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { confluenceData } from '@/data/confluence';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { content } from '@/data/content';
 import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
 import { GlassButton } from '../ui/GlassButton';
 
 export function ConfluenceSection() {
-  const [activeTrackId, setActiveTrackId] = useState(confluenceData.tracks[0].id);
-  const activeTrack = confluenceData.tracks.find((t) => t.id === activeTrackId) || confluenceData.tracks[0];
+  const data = content.home.residency;
 
   return (
-    <section id="confluence" className="py-12 md:py-16 relative bg-grain overflow-hidden">
-      {/* Background Glass Orbs */}
+    <section id="residency" className="py-12 md:py-16 relative bg-[var(--bg-card)] overflow-hidden border-y border-[var(--border-subtle)]">
       <div className="absolute bottom-10 -left-20 w-96 h-96 rounded-full bg-[var(--accent-terra)]/10 blur-3xl pointer-events-none animate-pulse-glow" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          eyebrow={`${confluenceData.date} · ${confluenceData.location}`}
-          title={confluenceData.title}
-          highlightText={confluenceData.tagline}
-          description={confluenceData.description}
+          eyebrow={data.label}
+          title={data.headline}
+          highlightText={data.sub}
+          description={data.body}
+          className="mb-12"
         />
 
-        {/* Expo Statistics Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-16">
-          <GlassCard className="p-6 text-center">
-            <div className="font-serif text-3xl md:text-4xl text-[var(--accent-terra)] font-light">
-              {confluenceData.duration}
-            </div>
-            <div className="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-1">Duration</div>
-          </GlassCard>
-
-          <GlassCard className="p-6 text-center">
-            <div className="font-serif text-3xl md:text-4xl text-[var(--accent-gold)] font-light">
-              {confluenceData.tracksCount} Tracks
-            </div>
-            <div className="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-1">Programme Streams</div>
-          </GlassCard>
-
-          <GlassCard className="p-6 text-center">
-            <div className="font-serif text-3xl md:text-4xl text-[var(--accent-sage)] font-light">
-              {confluenceData.delegatesCount}
-            </div>
-            <div className="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-1">Target Delegates</div>
-          </GlassCard>
-
-          <GlassCard className="p-6 text-center">
-            <div className="font-serif text-3xl md:text-4xl text-[var(--accent-terra-light)] font-light">
-              {confluenceData.exhibitorsCount}
-            </div>
-            <div className="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-1">Curated Brands</div>
-          </GlassCard>
-        </div>
-
-        {/* 5 Programme Tracks Showcase */}
-        <div className="mt-16">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[var(--accent-terra)] mb-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-terra)] shrink-0" />
-            PROGRAMME TRACKS
-          </span>
-          <h3 className="font-serif text-2xl md:text-4xl font-normal text-[var(--text-primary)] mb-8">
-            Five Immersive Learning & Experience Stages
-          </h3>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Track Selector List */}
-            <div className="lg:col-span-5 space-y-3">
-              {confluenceData.tracks.map((track) => {
-                const isSelected = track.id === activeTrackId;
-                return (
-                  <button
-                    key={track.id}
-                    type="button"
-                    onClick={() => setActiveTrackId(track.id)}
-                    className={`w-full p-5 rounded-xl text-left transition-all duration-300 cursor-pointer flex items-center justify-between border ${
-                      isSelected
-                        ? 'bg-[var(--accent-gold)]/15 border-[var(--accent-gold)] text-[var(--text-primary)] shadow-md translate-x-2'
-                        : 'glass-panel text-[var(--text-secondary)] hover:border-[var(--accent-gold)]/50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-2xl text-[var(--accent-gold)]">{track.icon}</span>
-                      <div>
-                        <div className="font-serif text-lg font-normal">{track.title}</div>
-                        <div className="text-xs text-[var(--text-muted)] tracking-wide line-clamp-1">
-                          {track.summary}
-                        </div>
-                      </div>
-                    </div>
-                    <span className="text-lg text-[var(--accent-gold)]">{isSelected ? '→' : '+'}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Track Detail Panel */}
-            <div className="lg:col-span-7">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTrack.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <GlassCard glowColor="gold" className="p-8 md:p-10 border-l-4 border-l-[var(--accent-gold)]">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-3xl text-[var(--accent-gold)]">{activeTrack.icon}</span>
-                      <h4 className="font-serif text-3xl font-normal text-[var(--text-primary)]">
-                        {activeTrack.title}
-                      </h4>
-                    </div>
-
-                    <p className="text-base text-[var(--text-secondary)] font-light leading-relaxed mb-8">
-                      {activeTrack.description}
-                    </p>
-
-                    <div>
-                      <h5 className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-semibold mb-4">
-                        Track Highlights & Topics
-                      </h5>
-                      <div className="space-y-3">
-                        {activeTrack.highlights.map((item) => (
-                          <div key={item} className="flex items-start gap-3 text-sm text-[var(--text-primary)]">
-                            <span className="text-[var(--accent-gold)] font-bold mt-0.5">◎</span>
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-8 pt-6 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                      <span className="text-xs text-[var(--text-muted)] tracking-wider uppercase">
-                        Goa July 2026
-                      </span>
-                      <GlassButton href="/apply?type=exhibitor" variant="outline" size="sm" showArrow>
-                        Exhibit in this Track
-                      </GlassButton>
-                    </div>
-                  </GlassCard>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+        {/* Philosophy Strip */}
+        <div className="w-full max-w-5xl mx-auto mb-16 lg:mb-24">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 lg:gap-x-12 gap-y-6 px-6 py-6 rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--bg-primary)]/40 backdrop-blur-md shadow-sm">
+            {data.philosophy.map((item, idx) => (
+              <motion.div
+                key={item.text}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="flex items-center gap-3"
+              >
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[var(--accent-gold)]/10 border border-[var(--accent-gold)]/20 flex items-center justify-center">
+                  <span className="text-[12px] text-[var(--accent-gold)]">{item.icon}</span>
+                </div>
+                <span className="text-sm font-medium text-[var(--text-primary)] tracking-wide">{item.text}</span>
+              </motion.div>
+            ))}
           </div>
         </div>
+
+        {/* Duration Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 lg:mb-24 max-w-6xl mx-auto">
+          {data.durations.map((duration, idx) => (
+            <motion.div
+              key={duration.days}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              className={duration.featured ? "md:-mt-6 md:mb-[-1.5rem] relative z-20" : "relative z-10 mt-4"}
+            >
+              {duration.featured && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[var(--accent-gold)] text-[var(--bg-primary)] text-[10px] font-bold tracking-widest uppercase px-5 py-2 rounded-full shadow-lg z-50 whitespace-nowrap">
+                  {duration.badge}
+                </div>
+              )}
+              <GlassCard 
+                className={`h-full flex flex-col p-8 lg:p-10 border bg-[var(--bg-primary)]/40 backdrop-blur-xl rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] ${duration.featured ? 'border-[var(--accent-gold)]/40 shadow-2xl' : 'border-[var(--border-subtle)] opacity-90 hover:opacity-100 hover:border-[var(--accent-gold)]/30'}`}
+              >
+                {duration.featured && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent-gold)]/15 blur-[60px] pointer-events-none rounded-full" />
+                )}
+                
+                <div className="text-center mb-8 relative z-10">
+                  <h4 className="font-serif text-5xl lg:text-6xl text-[var(--text-primary)] mb-3 drop-shadow-sm">
+                    {duration.days} <span className="text-2xl text-[var(--text-secondary)]">Days</span>
+                  </h4>
+                  <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--accent-terra)] font-semibold">
+                    {duration.dates}
+                  </div>
+                </div>
+
+                <div className="w-full h-[1px] bg-[var(--border-subtle)] opacity-60 mb-8" />
+
+                <div className="text-center flex-grow mb-8 relative z-10 flex flex-col justify-center">
+                  <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--text-secondary)] font-medium mb-3">
+                    Starting from
+                  </div>
+                  <div className="font-serif text-4xl text-[var(--accent-gold)] mb-5">
+                    {duration.startingFrom}
+                  </div>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-[220px] mx-auto opacity-90">
+                    "{duration.idealFor}"
+                  </p>
+                </div>
+
+                <div className="relative z-10 w-full mt-auto">
+                  <GlassButton href={`/book?type=residency&duration=${duration.days}`} variant={duration.featured ? "primary" : "outline"} size="lg" className="w-full text-center justify-center py-4">
+                    {duration.cta}
+                  </GlassButton>
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Additional Inclusions */}
+        <div className="max-w-5xl mx-auto">
+          <GlassCard className="p-8 lg:p-12 border border-[var(--border-subtle)] bg-[var(--bg-primary)]/40 backdrop-blur-xl rounded-[2rem] lg:rounded-[3rem] relative overflow-hidden group">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-r from-[var(--accent-sage)]/5 to-[var(--accent-gold)]/5 blur-[80px] pointer-events-none rounded-full" />
+            
+            <div className="relative z-10">
+              <h4 className="text-center font-serif text-2xl lg:text-3xl text-[var(--text-primary)] mb-10 flex items-center justify-center gap-4">
+                <div className="w-1.5 h-1.5 rounded-sm bg-[var(--accent-sage)] opacity-70" />
+                Included in all Residencies
+                <div className="w-1.5 h-1.5 rounded-sm bg-[var(--accent-sage)] opacity-70" />
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-6 max-w-4xl mx-auto px-4">
+                {data.additionalInclusions.map((inclusion, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="flex items-center gap-3 group/inc"
+                  >
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--accent-sage)]/10 border border-[var(--accent-sage)]/20 flex items-center justify-center transition-colors group-hover/inc:bg-[var(--accent-sage)]/20">
+                      <span className="w-1.5 h-1.5 rounded-sm bg-[var(--accent-sage)]" />
+                    </div>
+                    <span className="text-sm md:text-base text-[var(--text-primary)] font-medium leading-tight">{inclusion}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+
       </div>
     </section>
   );

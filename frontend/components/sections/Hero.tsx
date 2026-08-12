@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SITE_METADATA } from '@/lib/constants';
-import { siteData } from '@/data/site';
+import { content } from '@/data/content';
 import { GlassButton } from '../ui/GlassButton';
 import { HeroStats } from './HeroStats';
 
@@ -40,7 +39,7 @@ export function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-elevated text-xs tracking-[0.25em] uppercase text-[var(--accent-terra)] mb-6 animate-float"
         >
           <span className="w-2 h-2 rounded-full bg-[var(--accent-terra)] animate-pulse" />
-          {siteData.hero.eyebrow}
+          {content.home.hero.eyebrow}
         </motion.div>
 
         {/* Main Headline */}
@@ -50,9 +49,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-[var(--text-primary)] mb-6"
         >
-          Find Your <br className="hidden sm:inline" />
+          {content.home.hero.headline1} <br className="hidden sm:inline" />
           <em className="not-italic text-[var(--accent-gold)] font-light italic">
-            True North.
+            {content.home.hero.headline2}
           </em>
         </motion.h1>
 
@@ -63,7 +62,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-[var(--text-secondary)] font-light leading-relaxed mb-8"
         >
-          {siteData.hero.subtitle}
+          {content.home.hero.body}
         </motion.p>
 
         {/* CTAs */}
@@ -73,11 +72,11 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
         >
-          <GlassButton href="/retreat" variant="primary" size="lg" showArrow>
-            {siteData.hero.primaryCta}
+          <GlassButton href="#retreat" variant="primary" size="lg" showArrow>
+            {content.home.hero.cta1}
           </GlassButton>
-          <GlassButton href="/confluence" variant="outline" size="lg">
-            {siteData.hero.secondaryCta}
+          <GlassButton href="#residency" variant="outline" size="lg">
+            {content.home.hero.cta2}
           </GlassButton>
         </motion.div>
       </div>

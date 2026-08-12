@@ -23,7 +23,7 @@ export function MediaGallerySection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
-    <section className="py-16 md:py-24 relative bg-background overflow-hidden">
+    <section className="py-10 md:py-12 relative bg-background overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-[var(--accent-terra)]/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[var(--accent-sage)]/10 rounded-full blur-[120px] pointer-events-none" />

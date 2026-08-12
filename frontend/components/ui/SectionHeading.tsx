@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 interface SectionHeadingProps {
   eyebrow?: string;
-  title: string;
+  title: React.ReactNode;
   highlightText?: string;
   description?: string;
   align?: 'left' | 'center' | 'right';
@@ -33,7 +33,7 @@ export function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={cn('flex flex-col max-w-3xl mb-6 md:mb-8', alignmentClasses[align], className)}
+      className={cn('flex flex-col w-full max-w-5xl mb-6 md:mb-8', alignmentClasses[align], className)}
     >
       {eyebrow && (
         <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[var(--accent-terra)] mb-3">
@@ -42,7 +42,7 @@ export function SectionHeading({
         </span>
       )}
 
-      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.15] text-[var(--text-primary)]">
+      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal leading-[1.2] tracking-tight text-[var(--text-primary)]">
         {title}{' '}
         {highlightText && (
           <em className="not-italic text-[var(--accent-gold)] font-light italic">
@@ -52,7 +52,7 @@ export function SectionHeading({
       </h2>
 
       {description && (
-        <p className="mt-4 text-base md:text-lg text-[var(--text-secondary)] leading-relaxed font-light">
+        <p className="mt-4 text-base md:text-lg text-[var(--text-secondary)] leading-relaxed font-light w-full">
           {description}
         </p>
       )}

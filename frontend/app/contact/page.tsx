@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ContactFormSection } from '@/components/sections/ContactFormSection';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
@@ -34,7 +34,9 @@ export default function ContactPage() {
 
       {/* Embedded Form Section */}
       <div className="mt-8">
-        <ContactFormSection />
+        <Suspense fallback={<div className="py-12 flex justify-center"><div className="w-8 h-8 rounded-full border-2 border-[var(--accent-gold)] border-t-transparent animate-spin" /></div>}>
+          <ContactFormSection />
+        </Suspense>
       </div>
     </div>
   );

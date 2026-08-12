@@ -2,7 +2,7 @@
 'use client';
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Loader2, MapPin, Mail, Phone } from 'lucide-react';
@@ -15,7 +15,7 @@ interface ContactFormSectionProps {
   defaultCategory?: string;
 }
 
-export function ContactFormSection({ defaultCategory }: ContactFormSectionProps) {
+function ContactFormContent({ defaultCategory }: ContactFormSectionProps) {
   const searchParams = useSearchParams();
   const categoryQuery = searchParams ? searchParams.get('type') : null;
 
@@ -330,5 +330,17 @@ export function ContactFormSection({ defaultCategory }: ContactFormSectionProps)
         </div>
       </div>
     </section>
+  );
+}
+
+export function ContactFormSection(props: ContactFormSectionProps) {
+  return (
+    <Suspense fallback={
+      <div className="py-12 flex justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-[var(--accent-gold)] border-t-transparent animate-spin" />
+      </div>
+    }>
+      <ContactFormContent {...props} />
+    </Suspense>
   );
 }

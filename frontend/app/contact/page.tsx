@@ -34,9 +34,7 @@ export default function ContactPage() {
 
       {/* Embedded Form Section */}
       <div className="mt-8">
-        <Suspense fallback={<div className="py-12 flex justify-center"><div className="w-8 h-8 rounded-full border-2 border-[var(--accent-gold)] border-t-transparent animate-spin" /></div>}>
-          <ContactFormSection />
-        </Suspense>
+        <ContactFormSection />
       </div>
     </div>
   );

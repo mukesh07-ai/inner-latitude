@@ -1,12 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SITE_METADATA, NAV_LINKS } from '@/lib/constants';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, CheckCircle2 } from 'lucide-react';
 
 export function Footer() {
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubscribed(true);
+    }
+  };
+
   return (
     <footer className="relative bg-[var(--bg-secondary)] border-t border-[var(--border-subtle)] pt-10 md:pt-12 pb-8 transition-colors duration-400 overflow-hidden">
       {/* Background glow and pattern */}
@@ -31,30 +41,63 @@ export function Footer() {
           className="mb-10 lg:mb-12 relative group"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-gold)]/10 via-[var(--accent-sage)]/5 to-[var(--accent-gold)]/10 dark:from-[var(--accent-gold)]/20 dark:via-[var(--accent-sage)]/10 dark:to-[var(--accent-gold)]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
-          <div className="relative glass-panel-elevated rounded-2xl px-6 py-8 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden border border-black/5 dark:border-white/5 shadow-2xl shadow-black/5 dark:shadow-none">
+          <div className="relative glass-panel-elevated rounded-2xl px-6 py-8 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden border border-black/5 dark:border-white/5 shadow-2xl shadow-black/5 dark:shadow-none min-h-[140px]">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent-gold)] to-transparent opacity-50" />
             
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)]">Stay Updated</h3>
-              <p className="text-[var(--text-secondary)] mt-1 text-sm md:text-base">Join our newsletter for the latest on our retreats and initiatives.</p>
-            </div>
-            
-            <form className="flex w-full md:w-auto relative" onSubmit={(e) => e.preventDefault()}>
-              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-              <input 
-                id="newsletter-email" 
-                type="email" 
-                placeholder="Enter your email address" 
-                required 
-                className="w-full md:w-[320px] bg-white/70 dark:bg-[var(--bg-surface)]/50 backdrop-blur-md border border-[var(--border-strong)] text-[var(--text-primary)] pl-5 pr-[110px] py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-gold)]/50 focus:border-[var(--accent-gold)]/50 transition placeholder:text-[var(--text-muted)] shadow-inner text-sm"
-              />
-              <button 
-                type="submit" 
-                className="absolute right-1.5 top-1.5 bottom-1.5 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-white dark:text-zinc-950 px-5 rounded-full font-semibold transition hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md text-sm"
-              >
-                Subscribe
-              </button>
-            </form>
+            <AnimatePresence mode="wait">
+              {isSubscribed ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  className="flex flex-col md:flex-row items-center justify-center w-full gap-4 text-center py-2"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[var(--accent-sage)]/20 text-[var(--accent-sage)] flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">Welcome to the Journey</h3>
+                    <p className="text-[var(--text-secondary)] text-sm md:text-base mt-1">
+                      Thank you for subscribing. Check your inbox for updates soon.
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col md:flex-row items-center justify-between w-full gap-6"
+                >
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-secondary)]">Stay Updated</h3>
+                    <p className="text-[var(--text-secondary)] mt-1 text-sm md:text-base">Join our newsletter for the latest on our retreats and initiatives.</p>
+                  </div>
+                  
+                  <form className="flex w-full md:w-auto relative" onSubmit={handleSubscribe}>
+                    <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+                    <input 
+                      id="newsletter-email" 
+                      type="email" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email address" 
+                      required 
+                      className="w-full md:w-[320px] bg-white/70 dark:bg-[var(--bg-surface)]/50 backdrop-blur-md border border-[var(--border-strong)] text-[var(--text-primary)] pl-5 pr-[110px] py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-gold)]/50 focus:border-[var(--accent-gold)]/50 transition placeholder:text-[var(--text-muted)] shadow-inner text-sm"
+                    />
+                    <button 
+                      type="submit" 
+                      className="absolute right-1.5 top-1.5 bottom-1.5 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-white dark:text-zinc-950 px-5 rounded-full font-semibold transition hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md text-sm"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
 

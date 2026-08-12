@@ -85,7 +85,7 @@ export function ConfluenceSection() {
                     {duration.startingFrom}
                   </div>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-[220px] mx-auto opacity-90">
-                    "{duration.idealFor}"
+                    &quot;{duration.idealFor}&quot;
                   </p>
                 </div>
 

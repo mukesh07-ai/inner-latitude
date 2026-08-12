@@ -115,7 +115,7 @@ export function TestimonialSection() {
                     className="absolute inset-0 flex items-center"
                   >
                     <p className="text-xl md:text-2xl font-light text-[var(--text-primary)] leading-relaxed">
-                      "{testimonials[activeIndex].content}"
+                      &quot;{testimonials[activeIndex].content}&quot;
                     </p>
                   </motion.div>
                 </AnimatePresence>

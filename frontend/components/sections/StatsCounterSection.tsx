@@ -18,7 +18,6 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
   useEffect(() => {
     if (isInView) {
-      let start = 0;
       const end = value;
       // Simple easing animation over 2 seconds
       const duration = 2000;
